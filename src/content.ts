@@ -166,37 +166,8 @@ export const projects: Project[] = [
     stack: ["React", "TypeScript", "Tailwind CSS", "Vite"],
     outcome: "End-to-end design and development showcasing advanced frontend craft and motion design sensibility.",
     accent: "gold",
-    placeholder: false
-  },
-  {
-    category: "Cinematic experience",
-    title: "IVORY Operations",
-    summary:
-      "An Awwwards-grade cinematic website featuring React Three Fiber for 3D elements, custom GLSL shaders, GSAP scroll choreography, and WebGL particle systems.",
-    stack: ["Next.js", "Three.js", "GLSL Shaders", "GSAP"],
-    outcome: "Pushed the boundaries of browser-based 3D rendering and scroll-driven narrative design.",
-    accent: "plum",
-    placeholder: false
-  },
-  {
-    category: "Intelligence platform",
-    title: "CCTV Intelligence Dashboard",
-    summary:
-      "A geospatial intelligence dashboard with CesiumJS 3D globe visualization, live CCTV video feed integration, spatial data overlays, and real-time monitoring capabilities.",
-    stack: ["CesiumJS", "React", "Video Streaming", "GIS"],
-    outcome: "Complex spatial data integrated with live video feeds in a performant, browser-based 3D environment.",
-    accent: "teal",
-    placeholder: false
-  },
-  {
-    category: "Creative build",
-    title: "Windows 95 Portfolio Theme",
-    summary:
-      "A pixel-perfect recreation of the Windows 95 desktop as a portfolio website — functional window chrome, taskbar, boot sequence, and interactive desktop apps.",
-    stack: ["React", "Tailwind CSS", "Custom UI System", "State Management"],
-    outcome: "Demonstrates deep CSS mastery, interaction design, and creative problem-solving ability.",
-    accent: "red",
-    placeholder: false
+    placeholder: false,
+    liveUrl: "https://hishamharis.netlify.app"
   },
   {
     category: "Brand website",
@@ -207,7 +178,8 @@ export const projects: Project[] = [
     outcome: "Demonstrates end-to-end brand identity work: from visual design and copywriting to full interactive ordering experience.",
     accent: "red",
     placeholder: false,
-    imageUrl: "/images/krimson-fc.png"
+    imageUrl: "/images/krimson-fc.png",
+    liveUrl: "https://krimson-fc.netlify.app"
   }
 ];
 

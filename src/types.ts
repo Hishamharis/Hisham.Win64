@@ -62,6 +62,7 @@ export interface Project {
   accent: "gold" | "plum" | "teal" | "red";
   placeholder?: boolean;
   imageUrl?: string;
+  liveUrl?: string;
 }
 
 export interface PostPreview {

@@ -594,8 +594,11 @@ function App() {
           {activeSection === "portfolio" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-gap-md">
               {projects.map((project, idx) => (
-                <article
-                  className={`group bg-surface-primary glass-panel rounded-xl border border-border-subtle overflow-hidden hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)] hover:border-accent-gold/30 transition-all duration-500 flex flex-col stagger-item stagger-delay-${idx + 1} ${
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group bg-surface-primary glass-panel rounded-xl border border-border-subtle overflow-hidden hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)] hover:border-accent-gold/30 transition-all duration-500 flex flex-col stagger-item stagger-delay-${idx + 1} cursor-pointer ${
                     idx % 2 !== 0 ? "md:mt-12" : ""
                   }`}
                   key={project.title}
@@ -617,12 +620,6 @@ function App() {
                   <div className="p-8 flex flex-col flex-1 relative z-10 -mt-10 bg-surface-primary rounded-t-xl border-t border-border-subtle">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="font-eyebrow-label text-accent-gold uppercase tracking-widest">{project.category}</span>
-                      {project.placeholder && (
-                        <>
-                          <span className="w-1 h-1 bg-border-subtle rounded-full"></span>
-                          <span className="font-eyebrow-label text-text-faint uppercase tracking-widest">Placeholder</span>
-                        </>
-                      )}
                     </div>
                     <h3 className="font-display-name text-2xl text-text-primary mb-3 group-hover:text-accent-gold transition-colors duration-300">
                       {project.title}
@@ -640,8 +637,15 @@ function App() {
                     {project.outcome && (
                       <p className="text-xs text-text-faint border-t border-border-subtle pt-4">{project.outcome}</p>
                     )}
+                    {project.liveUrl && (
+                      <div className="flex items-center gap-2 mt-4 text-accent-gold text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <ExternalLink size={14} />
+                        <span>Visit live site</span>
+                        <ArrowRight size={12} />
+                      </div>
+                    )}
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           )}
