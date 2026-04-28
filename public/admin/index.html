@@ -8,179 +8,31 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
-    /* ── Dark branded admin theme ── */
-    :root {
-      --bg-deep: #111213;
-      --bg-surface: #161718;
-      --bg-card: #1a1b1d;
-      --border: rgba(255,255,255,0.06);
-      --gold: #d7ba79;
-      --gold-soft: rgba(215,186,121,0.08);
-      --text-primary: #f4efe6;
-      --text-secondary: rgba(244,239,230,0.55);
-      --text-faint: rgba(244,239,230,0.25);
-    }
-
+    /*
+     * Minimal dark theme for Decap CMS.
+     * Only targets root-level backgrounds and the top bar —
+     * leaves CMS component internals untouched to avoid layout breakage.
+     */
     body {
-      background: var(--bg-deep) !important;
-      font-family: 'Manrope', -apple-system, sans-serif !important;
+      background: #111213 !important;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
     }
 
-    /* Top bar */
-    [class*="AppHeader"] {
-      background: var(--bg-surface) !important;
-      border-bottom: 1px solid var(--border) !important;
+    /* Top navigation bar */
+    header[class*="AppHeader"],
+    nav[class*="AppHeader"],
+    [data-testid="app-header"] {
+      background: #161718 !important;
+      border-bottom: 1px solid rgba(255,255,255,0.06) !important;
     }
 
-    [class*="AppHeader"] a,
-    [class*="AppHeader"] span,
-    [class*="AppHeader"] button {
-      color: var(--text-primary) !important;
-      font-family: 'Manrope', sans-serif !important;
-    }
-
-    /* Sidebar */
-    [class*="SidebarNavList"],
-    [class*="Sidebar"] {
-      background: var(--bg-surface) !important;
-      border-right: 1px solid var(--border) !important;
-    }
-
-    [class*="SidebarNavLink"] {
-      color: var(--text-secondary) !important;
-      font-family: 'Manrope', sans-serif !important;
-      transition: color 0.2s, background 0.2s;
-    }
-
-    [class*="SidebarNavLink"]:hover,
-    [class*="SidebarNavLink"][class*="active"] {
-      color: var(--gold) !important;
-      background: var(--gold-soft) !important;
-    }
-
-    /* Main content area */
-    [class*="Main"],
-    [class*="EntryListing"],
-    [class*="DashboardContainer"],
-    main {
-      background: var(--bg-deep) !important;
-    }
-
-    /* Cards / entries */
-    [class*="ListCard"],
-    [class*="EntryCard"],
-    [class*="Card"] {
-      background: var(--bg-card) !important;
-      border: 1px solid var(--border) !important;
-      border-radius: 12px !important;
-      transition: border-color 0.2s;
-    }
-
-    [class*="ListCard"]:hover,
-    [class*="EntryCard"]:hover,
-    [class*="Card"]:hover {
-      border-color: rgba(215,186,121,0.2) !important;
-    }
-
-    /* Text */
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--text-primary) !important;
-      font-family: 'Noto Serif', Georgia, serif !important;
-    }
-
-    p, span, label, td, th, li, div {
-      color: var(--text-secondary) !important;
-    }
-
-    a {
-      color: var(--gold) !important;
-    }
-
-    /* Form fields */
-    input, textarea, select {
-      background: var(--bg-card) !important;
-      border: 1px solid var(--border) !important;
-      color: var(--text-primary) !important;
-      border-radius: 8px !important;
-      font-family: 'Manrope', sans-serif !important;
-      transition: border-color 0.2s;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--gold) !important;
-      outline: none !important;
-      box-shadow: 0 0 0 2px rgba(215,186,121,0.15) !important;
-    }
-
-    /* Buttons */
-    button {
-      font-family: 'Manrope', sans-serif !important;
-    }
-
-    [class*="ToolbarButton"],
-    [class*="Button"]:not([class*="close"]) {
-      border-radius: 8px !important;
-    }
-
-    /* Publish / primary button */
-    [class*="PublishButton"],
-    button[class*="primary"],
-    [class*="ControlButton"] {
-      background: linear-gradient(135deg, #d7ba79, #c4a862) !important;
-      color: #111213 !important;
-      border: none !important;
-      font-weight: 600 !important;
-      border-radius: 8px !important;
-      box-shadow: 0 2px 12px rgba(215,186,121,0.2) !important;
-    }
-
-    /* Editor toolbar */
-    [class*="Toolbar"],
-    [class*="EditorToolbar"] {
-      background: var(--bg-surface) !important;
-      border: 1px solid var(--border) !important;
-      border-radius: 8px !important;
-    }
-
-    /* Preview pane */
-    [class*="PreviewPane"] {
-      background: var(--bg-deep) !important;
-    }
-
-    /* Scrollbars */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-deep);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.08);
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(215,186,121,0.3);
-    }
-
-    /* Login widget override */
-    .netlify-identity-widget {
-      font-family: 'Manrope', sans-serif !important;
-    }
-
-    /* Table */
-    table {
-      border-collapse: collapse;
-    }
-    th {
-      color: var(--text-faint) !important;
-      font-weight: 500 !important;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111213; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
   </style>
 </head>
 <body>

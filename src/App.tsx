@@ -979,9 +979,9 @@ function App() {
                       )}
                     </div>
                   )}
-                  {formStatus === "idle" && (
+                  {import.meta.env.DEV && formStatus === "idle" && (
                      <div className="p-4 rounded-lg border bg-white/5 border-white/10 text-text-secondary text-sm">
-                        <p>Real submission works after Netlify deploy. Local preview simulates the success state.</p>
+                        <p>🛠 Dev mode — form submission is simulated. Works for real after Netlify deploy.</p>
                      </div>
                   )}
                 </form>
