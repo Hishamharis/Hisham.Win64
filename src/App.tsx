@@ -550,25 +550,16 @@ function App() {
               </section>
             </div>
 
-            {/* Tools — full width 3-column row with animated skill bars */}
+            {/* Tools — full width 3-column row */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-8">
-              {toolGroups.map((group, gi) => (
-                <section className={`bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 card-hover stagger-item stagger-delay-${gi + 6}`} key={group.title}>
-                  <h3 className="font-nav-item text-text-primary mb-5">{group.title}</h3>
-                  <div className="space-y-4">
-                    {group.items.map((item, ii) => (
-                      <div key={item.name} className={`skill-bar-delay-${ii + 1}`}>
-                        <div className="flex justify-between items-center mb-1.5">
-                          <span className="text-xs text-text-secondary">{item.name}</span>
-                          <span className="text-[10px] text-text-faint">{item.level}%</span>
-                        </div>
-                        <div className="skill-bar-track">
-                          <div
-                            className="skill-bar-fill"
-                            style={{ '--skill-level': `${item.level}%` } as React.CSSProperties}
-                          />
-                        </div>
-                      </div>
+              {toolGroups.map((group, i) => (
+                <section className={`bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 card-hover stagger-item stagger-delay-${i + 6}`} key={group.title}>
+                  <h3 className="font-nav-item text-text-primary mb-4">{group.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span key={item} className="px-3 py-1 bg-surface-secondary border border-border-subtle rounded-full text-xs text-text-secondary tag-hover cursor-default">
+                        {item}
+                      </span>
                     ))}
                   </div>
                 </section>

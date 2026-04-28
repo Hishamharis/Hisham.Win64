@@ -50,7 +50,7 @@ export interface TimelineItem {
 
 export interface ToolGroup {
   title: string;
-  items: { name: string; level: number }[];
+  items: string[];
 }
 
 export interface Project {

@@ -145,36 +145,15 @@ export const education: TimelineItem[] = [
 export const toolGroups: ToolGroup[] = [
   {
     title: "Frontend",
-    items: [
-      { name: "React", level: 92 },
-      { name: "Next.js", level: 78 },
-      { name: "TypeScript", level: 85 },
-      { name: "Tailwind CSS", level: 95 },
-      { name: "Framer Motion", level: 70 },
-      { name: "Three.js", level: 60 }
-    ]
+    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"]
   },
   {
     title: "Backend & Data",
-    items: [
-      { name: "Node.js", level: 80 },
-      { name: "MongoDB", level: 72 },
-      { name: "REST APIs", level: 88 },
-      { name: "Python", level: 65 },
-      { name: "SQL", level: 68 },
-      { name: "Firebase", level: 75 }
-    ]
+    items: ["Node.js", "MongoDB", "REST APIs", "Python", "SQL", "Firebase"]
   },
   {
     title: "Business Tools",
-    items: [
-      { name: "Figma", level: 82 },
-      { name: "Git & GitHub", level: 90 },
-      { name: "AI Workflows", level: 88 },
-      { name: "Google Maps API", level: 76 },
-      { name: "Netlify / Vercel", level: 92 },
-      { name: "Analytics", level: 70 }
-    ]
+    items: ["Figma", "Git & GitHub", "AI Workflows", "Google Maps API", "Netlify / Vercel", "Analytics"]
   }
 ];
 
