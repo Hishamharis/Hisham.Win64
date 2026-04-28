@@ -32,12 +32,7 @@ export const profile: Profile = {
   portraitNote: ""
 };
 
-export const socialLinks: SocialLink[] = [
-  { label: "Email", value: "Hishamharismeet@gmail.com", placeholder: false },
-  { label: "GitHub", value: "github.com/hishamharis", placeholder: false },
-  { label: "X", value: "x.com/hishamharismeet", placeholder: false },
-  { label: "Instagram", value: "instagram.com/_hishamhh", placeholder: false }
-];
+
 
 export const highlights: Highlight[] = [
   {
@@ -301,7 +296,7 @@ export const contactMethods: ContactMethod[] = [
   }
 ];
 
-export const socialPlatforms = [
+export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
     handle: "@hishamharis",

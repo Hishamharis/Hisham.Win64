@@ -18,8 +18,13 @@ export interface Profile {
 }
 
 export interface SocialLink {
-  label: string;
-  value: string;
+  name: string;
+  handle: string;
+  url: string;
+  icon: "github" | "x" | "instagram" | "linkedin";
+  comingSoon?: boolean;
+  label?: string;
+  value?: string;
   href?: string;
   placeholder?: boolean;
 }

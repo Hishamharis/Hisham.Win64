@@ -31,7 +31,6 @@ import {
   servicePillars,
   services,
   socialLinks,
-  socialPlatforms,
   toolGroups,
 } from "./content";
 import type { NavSection, PostPreview } from "./types";
@@ -270,8 +269,11 @@ function App() {
       )}
       {/* TopAppBar (Mobile) */}
       <header className="bg-[#161719]/80 backdrop-blur-md fixed top-0 w-full z-40 lg:hidden border-b border-white/5 shadow-2xl shadow-black/50 fade-in">
-        <div className="flex justify-between items-center px-6 h-16">
-          <span className="font-serif text-[#d7ba79] font-black text-xl">MHH</span>
+        <div className="flex justify-between items-center px-5 h-16">
+          <button onClick={() => handleSectionChange("about")} className="flex items-center gap-2.5">
+            <img src="/monogram.png" alt="MH" className="w-8 h-8 object-contain rounded" />
+            <span className="font-serif text-[#d7ba79] font-bold text-sm tracking-wide">Hisham Haris</span>
+          </button>
           <nav className="hidden md:flex space-x-6">
             {navSections.slice(0, 4).map((section) => (
               <button
@@ -284,10 +286,11 @@ function App() {
             ))}
           </nav>
           <button
-            className="text-[#d7ba79] p-2 md:hidden"
+            className="text-[#d7ba79] p-2 md:hidden active:scale-90 transition-transform"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <Menu size={24} />
+            <Menu size={22} />
           </button>
         </div>
         {mobileMenuOpen && (
@@ -296,31 +299,99 @@ function App() {
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden"
               onClick={() => setMobileMenuOpen(false)}
             />
-            <nav className="mobile-menu-slide flex flex-col bg-[#161719]/95 backdrop-blur-md px-6 py-6 space-y-2 md:hidden border-b border-white/5 relative z-40">
-              {navSections.map((section, i) => {
-                const Icon = navIcons[section.id];
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => {
-                      handleSectionChange(section.id);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`text-left flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-200 stagger-item stagger-delay-${i + 1} ${
-                      activeSection === section.id
-                        ? 'text-[#d7ba79] bg-white/5 font-semibold'
-                        : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
-                    }`}
-                  >
-                    <Icon size={18} />
-                    {section.label}
-                  </button>
-                );
-              })}
+            <nav className="mobile-menu-slide flex flex-col bg-[#111213]/98 backdrop-blur-xl px-5 pt-4 pb-6 md:hidden border-b border-white/5 relative z-40">
+              {/* Menu header with branding */}
+              <div className="flex items-center gap-3 pb-4 mb-3 border-b border-white/10">
+                <img src="/monogram.png" alt="MH" className="w-12 h-12 object-contain rounded-lg border border-accent-gold/20" />
+                <div>
+                  <h3 className="text-[#d7ba79] font-serif font-bold text-base">{profile.name}</h3>
+                  <p className="text-slate-500 text-xs">{profile.role}</p>
+                </div>
+              </div>
+              {/* Navigation items */}
+              <div className="space-y-1">
+                {navSections.map((section, i) => {
+                  const Icon = navIcons[section.id];
+                  return (
+                    <button
+                      key={section.id}
+                      onClick={() => {
+                        handleSectionChange(section.id);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`w-full text-left flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-200 stagger-item stagger-delay-${i + 1} ${
+                        activeSection === section.id
+                          ? 'text-[#d7ba79] bg-white/5 font-semibold'
+                          : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                      }`}
+                    >
+                      <Icon size={18} />
+                      {section.label}
+                      {activeSection === section.id && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#d7ba79]" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+              {/* CTA + socials */}
+              <div className="mt-4 pt-4 border-t border-white/10 space-y-4">
+                <button
+                  onClick={() => { handleSectionChange("contact"); setMobileMenuOpen(false); }}
+                  className="w-full bg-accent-soft text-accent-gold border border-accent-gold/20 font-nav-item text-sm py-3 px-5 rounded-lg hover:bg-accent-gold hover:text-on-primary transition-all duration-300"
+                >
+                  {profile.availability}
+                </button>
+                <div className="flex justify-center gap-5">
+                  {socialLinks.filter(s => !s.comingSoon).map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-500 hover:text-[#d7ba79] transition-colors p-1"
+                    >
+                      {link.icon === "github" && <GithubIcon size={16} />}
+                      {link.icon === "x" && <XIcon size={16} />}
+                      {link.icon === "instagram" && <InstagramIcon size={16} />}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </nav>
           </>
         )}
       </header>
+
+      {/* Mobile Hero — shows branding below the sticky header */}
+      <section className="lg:hidden pt-20 pb-6 px-5 flex flex-col items-center text-center relative z-10 fade-in">
+        <div className="portrait-glow relative mb-4">
+          <img
+            src="/monogram.png"
+            alt={profile.name}
+            className="w-24 h-24 object-contain rounded-xl relative z-10 bg-[#111213] border border-accent-gold/10"
+          />
+        </div>
+        <h1 className="font-serif text-[#d7ba79] text-2xl font-bold tracking-tight mb-1.5 gold-heading-glow">
+          {profile.name}
+        </h1>
+        <p className="text-slate-400 text-sm mb-5 max-w-[280px]">{profile.role}</p>
+        {/* Progress dots */}
+        <div className="flex justify-center gap-1.5 mb-4">
+          {navSections.map((section) => (
+            <button
+              key={`mobile-dot-${section.id}`}
+              onClick={() => handleSectionChange(section.id)}
+              className={`rounded-full transition-all duration-300 ${
+                activeSection === section.id
+                  ? 'w-5 h-1.5 bg-[#d7ba79]'
+                  : 'w-1.5 h-1.5 bg-slate-600 hover:bg-slate-400'
+              }`}
+              title={section.label}
+            />
+          ))}
+        </div>
+      </section>
 
       {/* SideNavBar (Desktop) */}
       <aside className="hidden lg:flex flex-col p-8 gap-8 bg-[#111213] w-[330px] h-screen fixed left-0 top-0 border-r border-slate-800/50 z-30">
@@ -384,7 +455,7 @@ function App() {
       </aside>
 
       {/* Main Content Workspace */}
-      <main className="flex-1 lg:ml-[330px] pt-24 lg:pt-16 pb-24 px-6 md:px-12 lg:px-20 max-w-[1380px] mx-auto w-full min-h-screen flex flex-col relative z-10">
+      <main className="flex-1 lg:ml-[330px] pt-4 lg:pt-16 pb-24 px-5 md:px-12 lg:px-20 max-w-[1380px] mx-auto w-full min-h-screen flex flex-col relative z-10">
         <header className="mb-stack-gap-lg border-b border-border-subtle pb-8 fade-in">
           <span className="font-eyebrow-label text-eyebrow-label text-accent-gold uppercase tracking-widest mb-2 block">
             {currentSection?.eyebrow}
@@ -742,7 +813,7 @@ function App() {
                 <div className="bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 stagger-item stagger-delay-3">
                   <h3 className="text-text-primary text-sm font-semibold mb-4">Find me on</h3>
                   <div className="space-y-3">
-                    {socialPlatforms.map((platform) => {
+                    {socialLinks.map((platform) => {
                       const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
                         github: GithubIcon,
                         x: XIcon,
