@@ -99,6 +99,29 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [activeBlogPost, setActiveBlogPost] = useState<PostPreview | null>(null);
+  const [cmsPosts, setCmsPosts] = useState<PostPreview[]>([]);
+
+  // Load CMS-created blog posts
+  useEffect(() => {
+    fetch('/blog/index.json')
+      .then(r => r.ok ? r.json() : [])
+      .then((data: PostPreview[]) => setCmsPosts(data.filter(p => !p.comingSoon)))
+      .catch(() => setCmsPosts([]));
+  }, []);
+
+  // Merge hardcoded + CMS posts: real posts first, fill remaining with Coming Soon placeholders
+  const allBlogPosts = (() => {
+    const hardcodedReal = posts.filter(p => !p.comingSoon && p.fullContent);
+    const hardcodedPlaceholders = posts.filter(p => p.comingSoon);
+    // Merge CMS posts (skip duplicates by title)
+    const existingTitles = new Set(hardcodedReal.map(p => p.title.toLowerCase()));
+    const newCmsPosts = cmsPosts.filter(p => !existingTitles.has(p.title.toLowerCase()));
+    const realPosts = [...hardcodedReal, ...newCmsPosts];
+    // Show all real posts, then fill up to at least 3 total with placeholders
+    const minSlots = Math.max(3, realPosts.length);
+    const placeholdersNeeded = Math.max(0, minSlots - realPosts.length);
+    return [...realPosts, ...hardcodedPlaceholders.slice(0, placeholdersNeeded)];
+  })();
 
   const sectionIds = navSections.map(s => s.id);
 
@@ -636,19 +659,19 @@ function App() {
               ) : (
                 /* Blog Card Grid */
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-gap-md">
-                  {posts.map((post, i) => (
+                  {allBlogPosts.map((post, i) => (
                     <article
                       className={`relative bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 group stagger-item stagger-delay-${i + 1} ${
                         post.comingSoon
-                          ? 'opacity-50 cursor-default'
+                          ? 'cursor-default'
                           : 'hover:border-accent-gold/30 card-hover card-shimmer cursor-pointer'
                       }`}
                       key={post.title}
                       onClick={() => !post.comingSoon && post.fullContent && setActiveBlogPost(post)}
                     >
                       {post.comingSoon && (
-                        <div className="absolute inset-0 flex items-center justify-center z-10 rounded-xl bg-page-bg/40 backdrop-blur-[1px]">
-                          <span className="text-accent-gold bg-accent-soft px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase">Coming Soon</span>
+                        <div className="absolute inset-0 flex items-center justify-center z-10 rounded-xl bg-[#0a0b0c]/80 backdrop-blur-sm">
+                          <span className="text-accent-gold bg-accent-soft border border-accent-gold/20 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase">Coming Soon</span>
                         </div>
                       )}
                       <div className="flex justify-between items-center mb-4 text-xs">
