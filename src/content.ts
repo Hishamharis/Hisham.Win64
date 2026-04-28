@@ -159,17 +159,6 @@ export const toolGroups: ToolGroup[] = [
 
 export const projects: Project[] = [
   {
-    category: "Developer portfolio",
-    title: "Cinematic Portfolio Website",
-    summary:
-      "This site — a dark, editorial-themed portfolio with cinematic entrance sequences, glassmorphism cards, ambient lighting effects, and a custom CSS animation engine. Built entirely from scratch.",
-    stack: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    outcome: "End-to-end design and development showcasing advanced frontend craft and motion design sensibility.",
-    accent: "gold",
-    placeholder: false,
-    liveUrl: "https://hishamharis.netlify.app"
-  },
-  {
     category: "Brand website",
     title: "Krimson FC — Premium Fried Chicken Brand",
     summary:

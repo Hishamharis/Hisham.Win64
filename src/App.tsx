@@ -598,9 +598,7 @@ function App() {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group bg-surface-primary glass-panel rounded-xl border border-border-subtle overflow-hidden hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)] hover:border-accent-gold/30 transition-all duration-500 flex flex-col stagger-item stagger-delay-${idx + 1} cursor-pointer ${
-                    idx % 2 !== 0 ? "md:mt-12" : ""
-                  }`}
+                  className={`group bg-surface-primary glass-panel rounded-xl border border-border-subtle overflow-hidden hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.6)] hover:border-accent-gold/30 transition-all duration-500 flex flex-col stagger-item stagger-delay-${idx + 1} cursor-pointer`}
                   key={project.title}
                 >
                   <div className="relative h-64 overflow-hidden bg-surface-secondary">
@@ -647,6 +645,20 @@ function App() {
                   </div>
                 </a>
               ))}
+
+              {/* Coming Soon placeholder card */}
+              <div className="relative bg-surface-primary glass-panel rounded-xl border border-border-subtle overflow-hidden flex flex-col stagger-item stagger-delay-2 cursor-default">
+                <div className="relative h-64 overflow-hidden bg-surface-secondary">
+                  <div className="w-full h-full bg-gradient-to-br from-surface-primary to-page-bg flex items-center justify-center">
+                    <Sparkles size={32} className="text-accent-gold/20" />
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-[#0a0b0c]/80 flex flex-col items-center justify-center z-20 rounded-xl">
+                  <Sparkles size={24} className="text-accent-gold/40 mb-3" />
+                  <span className="font-serif text-accent-gold/60 text-lg italic">Coming Soon</span>
+                  <p className="text-text-faint text-xs mt-2 max-w-[200px] text-center">New project in the works — stay tuned.</p>
+                </div>
+              </div>
             </div>
           )}
 
