@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Mohammed Hisham Haris — Full-stack web developer helping local service businesses get more clients through professional websites, reputation management, and smart digital strategy."
+    />
+    <meta name="theme-color" content="#111213" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Mohammed Hisham Haris" />
+    <link rel="canonical" href="https://mohammedhishamharis.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mohammed Hisham Haris | Portfolio" />
+    <meta property="og:description" content="Full-stack web developer helping local businesses get more clients through professional websites and smart digital strategy." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mohammedhishamharis.com" />
+    <meta property="og:image" content="/favicon.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Mohammed Hisham Haris | Portfolio" />
+    <meta name="twitter:description" content="Full-stack web developer & digital solutions specialist based in Kannur, Kerala." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Font preloading (eliminates FOUT) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>Mohammed Hisham Haris | Portfolio</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohammed Hisham Haris",
+        "jobTitle": "Full-Stack Web Developer & Digital Solutions Specialist",
+        "url": "https://mohammedhishamharis.com",
+        "sameAs": [
+          "https://github.com/hishamharis",
+          "https://x.com/hishamharismeet",
+          "https://instagram.com/_hishamhh"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kannur",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "description": "Full-stack web developer helping local service businesses get more clients through professional websites, reputation management, and smart digital strategy.",
+        "knowsAbout": ["Web Development", "React", "TypeScript", "Local Business Websites", "Reputation Management", "Full-Stack Development"]
+      }
+    </script>
+
+    <!-- 5.2 Analytics — Uncomment and update domain when ready -->
+    <!-- <script defer data-domain="mohammedhishamharis.com" src="https://plausible.io/js/script.js"></script> -->
+
+    <!-- Netlify Identity Widget (for Decap CMS login) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <form
+      name="contact"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="project-type" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- Netlify Identity redirect for CMS -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', user => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
