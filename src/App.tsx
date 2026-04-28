@@ -109,18 +109,15 @@ function App() {
       .catch(() => setCmsPosts([]));
   }, []);
 
-  // Merge hardcoded + CMS posts: real posts first, fill remaining with Coming Soon placeholders
+  // Merge hardcoded + CMS posts: real posts first, Coming Soon placeholder at end
   const allBlogPosts = (() => {
     const hardcodedReal = posts.filter(p => !p.comingSoon && p.fullContent);
-    const hardcodedPlaceholders = posts.filter(p => p.comingSoon);
+    const comingSoonCard = posts.find(p => p.comingSoon);
     // Merge CMS posts (skip duplicates by title)
     const existingTitles = new Set(hardcodedReal.map(p => p.title.toLowerCase()));
     const newCmsPosts = cmsPosts.filter(p => !existingTitles.has(p.title.toLowerCase()));
     const realPosts = [...hardcodedReal, ...newCmsPosts];
-    // Show all real posts, then fill up to at least 3 total with placeholders
-    const minSlots = Math.max(3, realPosts.length);
-    const placeholdersNeeded = Math.max(0, minSlots - realPosts.length);
-    return [...realPosts, ...hardcodedPlaceholders.slice(0, placeholdersNeeded)];
+    return comingSoonCard ? [...realPosts, comingSoonCard] : realPosts;
   })();
 
   const sectionIds = navSections.map(s => s.id);
@@ -741,44 +738,47 @@ function App() {
                 </article>
               ) : (
                 /* Blog Card Grid */
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-gap-md">
-                  {allBlogPosts.map((post, i) => (
-                    <article
-                      className={`relative bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 group stagger-item stagger-delay-${i + 1} ${
-                        post.comingSoon
-                          ? 'cursor-default'
-                          : 'hover:border-accent-gold/30 card-hover card-shimmer cursor-pointer'
-                      }`}
-                      key={post.title}
-                      onClick={() => {
-                        if (!post.comingSoon && post.fullContent && post.slug) {
-                          window.open(`/blog/${post.slug}`, '_self');
-                        } else if (!post.comingSoon && post.fullContent) {
-                          setActiveBlogPost(post);
-                        }
-                      }}
-                    >
-                      {post.comingSoon && (
-                        <div className="absolute inset-0 flex items-center justify-center z-10 rounded-xl bg-[#0a0b0c]/80 backdrop-blur-sm">
-                          <span className="text-accent-gold bg-accent-soft border border-accent-gold/20 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase">Coming Soon</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-gap-md">
+                  {allBlogPosts.map((post, i) =>
+                    post.comingSoon ? (
+                      /* Coming Soon placeholder card — matches portfolio style */
+                      <div
+                        key="coming-soon"
+                        className={`relative bg-surface-primary glass-panel rounded-xl border border-border-subtle overflow-hidden flex flex-col min-h-[280px] stagger-item stagger-delay-${i + 1} cursor-default`}
+                      >
+                        <div className="absolute inset-0 bg-[#0a0b0c]/80 flex flex-col items-center justify-center z-20 rounded-xl">
+                          <Sparkles size={24} className="text-accent-gold/40 mb-3" />
+                          <span className="font-serif text-accent-gold/60 text-lg italic">Coming Soon</span>
+                          <p className="text-text-faint text-xs mt-2 max-w-[200px] text-center">New articles in the works — stay tuned.</p>
                         </div>
-                      )}
-                      <div className="flex justify-between items-center mb-4 text-xs">
-                        <span className="text-accent-gold">{post.category}</span>
-                        <span className="text-text-faint">{post.readTime}</span>
                       </div>
-                      <h3 className={`font-nav-item text-lg text-text-primary mb-3 transition-colors ${
-                        post.comingSoon ? '' : 'group-hover:text-accent-gold underline-sweep'
-                      }`}>{post.title}</h3>
-                      <p className="text-text-secondary text-sm line-clamp-3">{post.description}</p>
-                      {!post.comingSoon && post.fullContent && (
-                        <div className="flex items-center gap-1 mt-4 text-xs text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity">
-                          <span>Read article</span>
-                          <ArrowRight size={12} />
+                    ) : (
+                      <article
+                        className={`relative bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 group stagger-item stagger-delay-${i + 1} hover:border-accent-gold/30 card-hover card-shimmer cursor-pointer`}
+                        key={post.title}
+                        onClick={() => {
+                          if (post.fullContent && post.slug) {
+                            window.open(`/blog/${post.slug}`, '_self');
+                          } else if (post.fullContent) {
+                            setActiveBlogPost(post);
+                          }
+                        }}
+                      >
+                        <div className="flex justify-between items-center mb-4 text-xs">
+                          <span className="text-accent-gold">{post.category}</span>
+                          <span className="text-text-faint">{post.readTime}</span>
                         </div>
-                      )}
-                    </article>
-                  ))}
+                        <h3 className="font-nav-item text-lg text-text-primary mb-3 transition-colors group-hover:text-accent-gold underline-sweep">{post.title}</h3>
+                        <p className="text-text-secondary text-sm line-clamp-3">{post.description}</p>
+                        {post.fullContent && (
+                          <div className="flex items-center gap-1 mt-4 text-xs text-accent-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span>Read article</span>
+                            <ArrowRight size={12} />
+                          </div>
+                        )}
+                      </article>
+                    )
+                  )}
                 </div>
               )}
             </div>

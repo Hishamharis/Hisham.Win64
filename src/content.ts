@@ -242,7 +242,46 @@ Your first client is one Google Maps search away.`
       "A simple, automated approach to requesting reviews from happy customers and climbing Google's ranking algorithm.",
     readTime: "4 min read",
     placeholder: false,
-    comingSoon: true
+    fullContent: `Most local businesses treat Google reviews as something that happens to them. They wait. They hope. And when a bad review lands, they panic.
+
+But the businesses that consistently sit at 4.5+ stars aren't lucky — they have a system.
+
+## The math behind reviews
+
+A business with a 3.8 rating typically has a mix: some 5-stars, a handful of 1-stars dragging the average down. The problem isn't bad service — it's that **unhappy customers are 2-3x more likely to leave a review** than satisfied ones.
+
+The fix isn't to prevent bad reviews. It's to **dramatically increase the volume of good ones.**
+
+## The review request system
+
+Here's the exact process that works:
+
+### Step 1 — Identify the moment
+After every completed job where the customer seems happy, the business sends a simple text or email within 2 hours. Timing matters — satisfaction fades quickly.
+
+### Step 2 — Make it effortless
+The message contains a direct link to the Google review page. Not the business profile. Not the website. **The review form itself.** One tap to leave a review.
+
+### Step 3 — Use the right words
+The message should feel personal, not corporate:
+
+- "Hey [name], thanks for choosing us today! If you have 30 seconds, a quick Google review would mean the world to us → [link]"
+- No pressure. No incentives. Just a human ask.
+
+### Step 4 — Respond to everything
+Every review — good or bad — gets a professional response within 24 hours. This signals to Google that the business is active, and to potential customers that the owner cares.
+
+## Why this works so fast
+
+If a business does 20 jobs per week and even 30% of customers leave a review, that's **6 new reviews per week**. In 90 days, that's ~78 new reviews — almost all 5-star.
+
+A business that goes from 3.8 with 45 reviews to 4.5 with 120+ reviews doesn't just look better. **Google ranks them higher in local search results.** More visibility = more calls = more revenue.
+
+## The bottom line
+
+The difference between a 3.8 and a 4.5 isn't quality of work. It's whether someone set up a 2-minute review request flow.
+
+**That's one of the services I offer.** I build the system, write the templates, and set up the automation. The business owner does nothing different — the reviews just start rolling in.`
   },
   {
     category: "Growth strategy",
@@ -252,6 +291,76 @@ Your first client is one Google Maps search away.`
       "The exact sections, trust signals, and call-to-action patterns that turn a simple 5-page website into a lead-generation machine.",
     readTime: "6 min read",
     placeholder: false,
+    fullContent: `A $500 website for a local service business doesn't need to be fancy. It needs to be **strategically ruthless** about one thing: converting visitors into phone calls or bookings.
+
+Here's exactly what a converting local business website needs — and what most developers get wrong.
+
+## The mistake most developers make
+
+They build a beautiful portfolio piece. Smooth animations. Creative layouts. Maybe even a blog section.
+
+But the plumber who hired them still gets zero calls from the website. Because **design isn't the bottleneck — trust and clarity are.**
+
+## The 5 sections that actually convert
+
+### 1. Hero section — 3 seconds to convince
+The hero needs three things visible without scrolling:
+- **What they do** (not a clever tagline — literally "Licensed Plumber in [City]")
+- **Social proof** (star rating + review count from Google)
+- **A call-to-action button** that says "Call Now" or "Book Online"
+
+### 2. Services with prices (or ranges)
+List every service with a brief description. If possible, include starting prices. **Transparency builds trust faster than anything else.**
+
+- Emergency drain cleaning — from $150
+- Water heater installation — from $800
+- Bathroom remodel — custom quote
+
+### 3. Google reviews section
+Don't write fake testimonials. Pull real reviews from their Google Maps profile. Show the reviewer's name, the star rating, and the full text.
+
+**Real reviews from Google are 3x more credible** than testimonials written on the website.
+
+### 4. About section with a real photo
+A photo of the actual business owner or team. Not a stock photo. People hire people they can see.
+
+Include:
+- Years in business
+- License/insurance numbers
+- Service area
+
+### 5. Contact section with multiple options
+- **Click-to-call button** (most traffic is mobile)
+- **Contact form** (for people who prefer not to call)
+- **Business hours** clearly displayed
+- **Service area map**
+
+## The technical non-negotiables
+
+- **Mobile-first** — 70%+ of local searches happen on phones
+- **Page speed under 2 seconds** — every second of delay costs 7% of conversions
+- **SSL certificate** — Google flags non-HTTPS sites as "Not Secure"
+- **Google Business Profile link** — connects the website to their Maps listing
+
+## What this costs vs. what it returns
+
+A local HVAC company averaging $500 per job needs **one new client from the website** to cover the entire cost. Most well-built sites generate 3-5 leads per month within the first 60 days.
+
+That's $1,500-$2,500/month in new revenue from a one-time $500 investment.
+
+## The bottom line
+
+A $500 website isn't about being cheap. It's about being **focused.** Every section exists to answer one question: "Should I call this business?"
+
+**That's what I build.** Professional, conversion-focused websites for local service businesses. No fluff. Just results.`
+  },
+  {
+    category: "Coming soon",
+    title: "More insights on the way",
+    slug: "coming-soon",
+    description: "New articles about web development, business growth, and digital strategy — stay tuned.",
+    readTime: "",
+    placeholder: true,
     comingSoon: true
   }
 ];
