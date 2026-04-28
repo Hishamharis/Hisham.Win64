@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from "react";
+import { Routes, Route, useParams, useNavigate, Link } from "react-router-dom";
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -131,7 +132,7 @@ function App() {
       setActiveSection(section);
       setIsTransitioning(false);
       setActiveBlogPost(null);
-    }, 200);
+    }, 250);
   };
 
   // 4.5 Loading screen — plays once per session
@@ -470,12 +471,7 @@ function App() {
 
         <div
           key={activeSection}
-          className="flex-1"
-          style={{
-            opacity: isTransitioning ? 0 : 1,
-            transform: isTransitioning ? 'translateY(12px)' : 'translateY(0)',
-            transition: 'opacity 0.2s ease, transform 0.3s ease',
-          }}
+          className={`flex-1 ${isTransitioning ? 'section-exit' : 'section-enter'}`}
         >
           {activeSection === "about" && (
             <div className="space-y-stack-gap-lg">
@@ -554,16 +550,25 @@ function App() {
               </section>
             </div>
 
-            {/* Tools — full width 3-column row */}
+            {/* Tools — full width 3-column row with animated skill bars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-8">
-              {toolGroups.map((group, i) => (
-                <section className={`bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 card-hover stagger-item stagger-delay-${i + 6}`} key={group.title}>
-                  <h3 className="font-nav-item text-text-primary mb-4">{group.title}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <span key={item} className="px-3 py-1 bg-surface-secondary border border-border-subtle rounded-full text-xs text-text-secondary tag-hover cursor-default">
-                        {item}
-                      </span>
+              {toolGroups.map((group, gi) => (
+                <section className={`bg-surface-primary glass-panel rounded-xl border border-border-subtle p-6 card-hover stagger-item stagger-delay-${gi + 6}`} key={group.title}>
+                  <h3 className="font-nav-item text-text-primary mb-5">{group.title}</h3>
+                  <div className="space-y-4">
+                    {group.items.map((item, ii) => (
+                      <div key={item.name} className={`skill-bar-delay-${ii + 1}`}>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <span className="text-xs text-text-secondary">{item.name}</span>
+                          <span className="text-[10px] text-text-faint">{item.level}%</span>
+                        </div>
+                        <div className="skill-bar-track">
+                          <div
+                            className="skill-bar-fill"
+                            style={{ '--skill-level': `${item.level}%` } as React.CSSProperties}
+                          />
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </section>
@@ -754,7 +759,13 @@ function App() {
                           : 'hover:border-accent-gold/30 card-hover card-shimmer cursor-pointer'
                       }`}
                       key={post.title}
-                      onClick={() => !post.comingSoon && post.fullContent && setActiveBlogPost(post)}
+                      onClick={() => {
+                        if (!post.comingSoon && post.fullContent && post.slug) {
+                          window.open(`/blog/${post.slug}`, '_self');
+                        } else if (!post.comingSoon && post.fullContent) {
+                          setActiveBlogPost(post);
+                        }
+                      }}
                     >
                       {post.comingSoon && (
                         <div className="absolute inset-0 flex items-center justify-center z-10 rounded-xl bg-[#0a0b0c]/80 backdrop-blur-sm">
@@ -1006,4 +1017,127 @@ function App() {
   );
 }
 
-export default App;
+// App component is no longer the default export — AppRouter is
+
+/* ── Blog Post Page (standalone route) ── */
+function BlogPostPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const allPosts: PostPreview[] = posts;
+
+  const post = allPosts.find(p => p.slug === slug);
+
+  useEffect(() => {
+    if (post) {
+      document.title = `${post.title} | Mohammed Hisham Haris`;
+      // Update meta description
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', post.description);
+      // Update OG tags
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', post.title);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', post.description);
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) ogUrl.setAttribute('content', `https://hishamharis.netlify.app/blog/${slug}`);
+    }
+    return () => {
+      document.title = 'Mohammed Hisham Haris | Portfolio';
+    };
+  }, [post, slug]);
+
+  if (!post || !post.fullContent) {
+    return (
+      <div className="min-h-screen bg-[#111213] flex flex-col items-center justify-center px-6 relative">
+        <div className="grain-overlay" />
+        <h1 className="font-serif text-3xl text-[#f4efe6] mb-4">Post not found</h1>
+        <p className="text-slate-400 mb-8">This article doesn't exist or hasn't been published yet.</p>
+        <Link
+          to="/"
+          className="text-[#d7ba79] hover:text-white text-sm flex items-center gap-2 transition-colors"
+        >
+          <ArrowRight size={14} className="rotate-180" />
+          Back to portfolio
+        </Link>
+      </div>
+    );
+  }
+
+  const renderInline = (text: string) => {
+    const parts = text.split(/\*\*(.+?)\*\*/g);
+    return parts.map((part, j) =>
+      j % 2 === 1
+        ? <strong key={j} className="text-[#f4efe6] font-semibold">{part}</strong>
+        : <span key={j}>{part}</span>
+    );
+  };
+
+  const content = post.fullContent;
+  const blocks = content.split(/\n\n+/).filter(b => b.trim());
+
+  return (
+    <div className="min-h-screen bg-[#111213] relative">
+      <div className="grain-overlay" />
+      <div className="blog-post-page px-6 py-16 relative z-10 section-enter">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-slate-400 hover:text-[#d7ba79] transition-colors mb-10 group"
+        >
+          <ArrowRight size={14} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-sm">Back to portfolio</span>
+        </Link>
+
+        <article>
+          <div className="blog-meta">
+            <span className="text-[#d7ba79] bg-[#d7ba79]/10 px-3 py-1 rounded text-xs font-medium">{post.category}</span>
+            <span className="text-slate-500 text-xs">{post.readTime}</span>
+          </div>
+          <h1>{post.title}</h1>
+          <div className="blog-post-content">
+            {blocks.map((block, i) => {
+              const trimmed = block.trim();
+              if (trimmed.startsWith('## ')) {
+                return <h2 key={i}>{trimmed.replace('## ', '')}</h2>;
+              }
+              if (trimmed.startsWith('### ')) {
+                return <h3 key={i}>{trimmed.replace('### ', '')}</h3>;
+              }
+              if (trimmed.startsWith('- ')) {
+                const items = trimmed.split('\n').filter(l => l.trim().startsWith('- '));
+                return (
+                  <ul key={i}>
+                    {items.map((li, j) => (
+                      <li key={j}>{renderInline(li.replace(/^- /, ''))}</li>
+                    ))}
+                  </ul>
+                );
+              }
+              return <p key={i}>{renderInline(trimmed.split('\n').join(' '))}</p>;
+            })}
+          </div>
+        </article>
+
+        <div className="mt-16 pt-8 border-t border-white/5">
+          <Link
+            to="/"
+            className="text-[#d7ba79] hover:text-white text-sm flex items-center gap-2 transition-colors"
+          >
+            <ArrowRight size={14} className="rotate-180" />
+            Back to portfolio
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main App Router ── */
+function AppRouter() {
+  return (
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/blog/:slug" element={<BlogPostPage />} />
+    </Routes>
+  );
+}
+
+export default AppRouter;

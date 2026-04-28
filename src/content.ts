@@ -145,15 +145,36 @@ export const education: TimelineItem[] = [
 export const toolGroups: ToolGroup[] = [
   {
     title: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"]
+    items: [
+      { name: "React", level: 92 },
+      { name: "Next.js", level: 78 },
+      { name: "TypeScript", level: 85 },
+      { name: "Tailwind CSS", level: 95 },
+      { name: "Framer Motion", level: 70 },
+      { name: "Three.js", level: 60 }
+    ]
   },
   {
     title: "Backend & Data",
-    items: ["Node.js", "MongoDB", "REST APIs", "Python", "SQL", "Firebase"]
+    items: [
+      { name: "Node.js", level: 80 },
+      { name: "MongoDB", level: 72 },
+      { name: "REST APIs", level: 88 },
+      { name: "Python", level: 65 },
+      { name: "SQL", level: 68 },
+      { name: "Firebase", level: 75 }
+    ]
   },
   {
     title: "Business Tools",
-    items: ["Figma", "Git & GitHub", "AI Workflows", "Google Maps API", "Netlify / Vercel", "Analytics"]
+    items: [
+      { name: "Figma", level: 82 },
+      { name: "Git & GitHub", level: 90 },
+      { name: "AI Workflows", level: 88 },
+      { name: "Google Maps API", level: 76 },
+      { name: "Netlify / Vercel", level: 92 },
+      { name: "Analytics", level: 70 }
+    ]
   }
 ];
 
@@ -175,6 +196,7 @@ export const projects: Project[] = [
 export const posts: PostPreview[] = [
   {
     category: "Local business",
+    slug: "competitor-getting-more-clients",
     title: "Your competitor has a worse rating than you — but they're getting more clients. Here's why.",
     description:
       "How a professional website with clear CTAs, real testimonials, and a booking system can outperform a competitor with better reviews but a terrible online presence.",
@@ -235,6 +257,7 @@ Your first client is one Google Maps search away.`
   },
   {
     category: "Reputation",
+    slug: "review-system-90-days",
     title: "From 3.8 to 4.5 stars in 90 days — the review system most businesses don't know about",
     description:
       "A simple, automated approach to requesting reviews from happy customers and climbing Google's ranking algorithm.",
@@ -244,6 +267,7 @@ Your first client is one Google Maps search away.`
   },
   {
     category: "Growth strategy",
+    slug: "500-dollar-website-conversion",
     title: "What a $500 website needs to convert for a local service business",
     description:
       "The exact sections, trust signals, and call-to-action patterns that turn a simple 5-page website into a lead-generation machine.",

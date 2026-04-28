@@ -50,7 +50,7 @@ export interface TimelineItem {
 
 export interface ToolGroup {
   title: string;
-  items: string[];
+  items: { name: string; level: number }[];
 }
 
 export interface Project {
@@ -68,6 +68,7 @@ export interface Project {
 export interface PostPreview {
   category: string;
   title: string;
+  slug?: string;
   description: string;
   readTime: string;
   placeholder?: boolean;
