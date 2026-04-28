@@ -197,6 +197,17 @@ export const projects: Project[] = [
     outcome: "Demonstrates deep CSS mastery, interaction design, and creative problem-solving ability.",
     accent: "red",
     placeholder: false
+  },
+  {
+    category: "Brand website",
+    title: "Krimson FC — Premium Fried Chicken Brand",
+    summary:
+      "A bold, cinematic brand website for a premium fried chicken concept — featuring an interactive menu system, loyalty rewards, story section, testimonials, and a full ordering flow with dark crimson aesthetics.",
+    stack: ["React", "Vite", "Tailwind CSS", "Responsive Design"],
+    outcome: "Demonstrates end-to-end brand identity work: from visual design and copywriting to full interactive ordering experience.",
+    accent: "red",
+    placeholder: false,
+    imageUrl: "/images/krimson-fc.png"
   }
 ];
 
