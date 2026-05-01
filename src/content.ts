@@ -169,6 +169,18 @@ export const projects: Project[] = [
     placeholder: false,
     imageUrl: "/images/krimson-fc.png",
     liveUrl: "https://krimson-fc.netlify.app"
+  },
+  {
+    category: "Tourism website",
+    title: "Kerala — God's Own Country",
+    summary:
+      "An immersive tourism showcase for Kerala featuring an interactive district map, experience-based exploration cards, AI-powered itinerary planner, and a warm golden-green aesthetic inspired by Kerala's landscapes.",
+    stack: ["HTML", "CSS", "JavaScript", "Interactive Maps"],
+    outcome: "Showcases rich visual storytelling, interactive UI components, and conversion-focused travel planning tools.",
+    accent: "green",
+    placeholder: false,
+    imageUrl: "/kerala-tourism.png",
+    liveUrl: "https://kerala-gods-own-country.netlify.app"
   }
 ];
 

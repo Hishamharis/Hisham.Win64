@@ -59,7 +59,7 @@ export interface Project {
   summary: string;
   stack: string[];
   outcome: string;
-  accent: "gold" | "plum" | "teal" | "red";
+  accent: "gold" | "plum" | "teal" | "red" | "green";
   placeholder?: boolean;
   imageUrl?: string;
   liveUrl?: string;
