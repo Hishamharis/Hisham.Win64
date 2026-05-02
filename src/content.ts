@@ -168,7 +168,7 @@ export const projects: Project[] = [
     accent: "red",
     placeholder: false,
     imageUrl: "/images/krimson-fc.png",
-    liveUrl: "https://krimson-fc.netlify.app"
+    liveUrl: "https://krimson-fc-portfolio.netlify.app/"
   },
   {
     category: "Tourism website",
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     accent: "green",
     placeholder: false,
     imageUrl: "/kerala-tourism.png",
-    liveUrl: "https://kerala-gods-own-country.netlify.app"
+    liveUrl: "https://kerala-gods-own-country-app.netlify.app/"
   }
 ];
 
