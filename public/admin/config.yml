@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
-site_url: https://hishamharis.netlify.app
+site_url: https://hisham-haris-portfolio.netlify.app
 
 media_folder: "public/images/blog"
 public_folder: "/images/blog"
